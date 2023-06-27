@@ -136,7 +136,7 @@ class MiniMaxEmbeddings(BaseModel, Embeddings):
 
         return embeddings
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Embed documents using a MiniMax embedding endpoint.
 
         Args:
@@ -148,7 +148,7 @@ class MiniMaxEmbeddings(BaseModel, Embeddings):
         embeddings = embed_with_retry(self, texts=texts, embed_type=self.embed_type_db)
         return embeddings
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Embed a query using a MiniMax embedding endpoint.
 
         Args:

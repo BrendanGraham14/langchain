@@ -123,7 +123,7 @@ class DashScopeEmbeddings(BaseModel, Embeddings):
             )
         return values
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Call out to DashScope's embedding endpoint for embedding search docs.
 
         Args:
@@ -140,7 +140,7 @@ class DashScopeEmbeddings(BaseModel, Embeddings):
         embedding_list = [item["embedding"] for item in embeddings]
         return embedding_list
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Call out to DashScope's embedding endpoint for embedding query text.
 
         Args:

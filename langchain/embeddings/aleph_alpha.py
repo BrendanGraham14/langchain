@@ -38,13 +38,13 @@ class AlephAlphaAsymmetricSemanticEmbedding(BaseModel, Embeddings):
     normalize: Optional[bool] = True
     """Should returned embeddings be normalized"""
     compress_to_size: Optional[int] = 128
-    """Should the returned embeddings come back as an original 5120-dim vector, 
+    """Should the returned embeddings come back as an original 5120-dim vector,
     or should it be compressed to 128-dim."""
     contextual_control_threshold: Optional[int] = None
-    """Attention control parameters only apply to those tokens that have 
+    """Attention control parameters only apply to those tokens that have
     explicitly been set in the request."""
     control_log_additive: Optional[bool] = True
-    """Apply controls on prompt items by adding the log(control_factor) 
+    """Apply controls on prompt items by adding the log(control_factor)
     to attention scores."""
     aleph_alpha_api_key: Optional[str] = None
     """API key for Aleph Alpha API."""
@@ -65,7 +65,7 @@ class AlephAlphaAsymmetricSemanticEmbedding(BaseModel, Embeddings):
         values["client"] = Client(token=aleph_alpha_api_key)
         return values
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Call out to Aleph Alpha's asymmetric Document endpoint.
 
         Args:
@@ -106,7 +106,7 @@ class AlephAlphaAsymmetricSemanticEmbedding(BaseModel, Embeddings):
 
         return document_embeddings
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Call out to Aleph Alpha's asymmetric, query embedding endpoint
         Args:
             text: The text to embed.
@@ -187,7 +187,7 @@ class AlephAlphaSymmetricSemanticEmbedding(AlephAlphaAsymmetricSemanticEmbedding
 
         return query_response.embedding
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Call out to Aleph Alpha's Document endpoint.
 
         Args:
@@ -202,7 +202,7 @@ class AlephAlphaSymmetricSemanticEmbedding(AlephAlphaAsymmetricSemanticEmbedding
             document_embeddings.append(self._embed(text))
         return document_embeddings
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Call out to Aleph Alpha's asymmetric, query embedding endpoint
         Args:
             text: The text to embed.

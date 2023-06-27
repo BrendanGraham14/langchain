@@ -42,7 +42,7 @@ class HypotheticalDocumentEmbedder(Chain, Embeddings):
         """Output keys for Hyde's LLM chain."""
         return self.llm_chain.output_keys
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Call the base embeddings."""
         return self.base_embeddings.embed_documents(texts)
 
@@ -50,7 +50,7 @@ class HypotheticalDocumentEmbedder(Chain, Embeddings):
         """Combine embeddings into final embeddings."""
         return list(np.array(embeddings).mean(axis=0))
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Generate a hypothetical document and embedded it."""
         var_name = self.llm_chain.input_keys[0]
         result = self.llm_chain.generate([{var_name: text}])

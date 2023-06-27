@@ -196,7 +196,7 @@ class ElasticsearchEmbeddings(Embeddings):
         embeddings = [doc["predicted_value"] for doc in response["inference_results"]]
         return embeddings
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """
         Generate embeddings for a list of documents.
 
@@ -210,7 +210,7 @@ class ElasticsearchEmbeddings(Embeddings):
         """
         return self._embedding_func(texts)
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """
         Generate an embedding for a single query text.
 

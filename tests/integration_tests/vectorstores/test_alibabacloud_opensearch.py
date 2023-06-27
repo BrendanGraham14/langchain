@@ -15,14 +15,14 @@ texts = ["foo", "bar", "baz"]
 class FakeEmbeddingsWithOsDimension(FakeEmbeddings):
     """Fake embeddings functionality for testing."""
 
-    def embed_documents(self, embedding_texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, embedding_texts: List[str]) -> List[List[float]]:
         """Return simple embeddings."""
         return [
             [float(1.0)] * (OS_TOKEN_COUNT - 1) + [float(i)]
             for i in range(len(embedding_texts))
         ]
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Return simple embeddings."""
         return [float(1.0)] * (OS_TOKEN_COUNT - 1) + [float(texts.index(text))]
 

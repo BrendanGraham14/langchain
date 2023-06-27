@@ -43,7 +43,7 @@ class ModelScopeEmbeddings(BaseModel, Embeddings):
 
         extra = Extra.forbid
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Compute doc embeddings using a modelscope embedding model.
 
         Args:
@@ -57,7 +57,7 @@ class ModelScopeEmbeddings(BaseModel, Embeddings):
         embeddings = self.embed(input=inputs)["text_embedding"]
         return embeddings.tolist()
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Compute query embeddings using a modelscope embedding model.
 
         Args:

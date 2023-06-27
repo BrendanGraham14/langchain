@@ -77,10 +77,10 @@ class GooglePalmEmbeddings(BaseModel, Embeddings):
 
         return values
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
-        return [self.embed_query(text) for text in texts]
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
+        return [self._embed_query(text) for text in texts]
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Embed query text."""
         embedding = embed_with_retry(self, self.model_name, text)
         return embedding["embedding"]

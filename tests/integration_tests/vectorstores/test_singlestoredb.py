@@ -35,10 +35,10 @@ class NormilizedFakeEmbeddings(FakeEmbeddings):
         """Normalize vector."""
         return [float(v / np.linalg.norm(vector)) for v in vector]
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         return [self.normalize(v) for v in super().embed_documents(texts)]
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         return self.normalize(super().embed_query(text))
 
 

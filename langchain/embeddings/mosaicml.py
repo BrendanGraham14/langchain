@@ -137,7 +137,7 @@ class MosaicMLInstructorEmbeddings(BaseModel, Embeddings):
 
         return embeddings
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Embed documents using a MosaicML deployed instructor embedding model.
 
         Args:
@@ -150,7 +150,7 @@ class MosaicMLInstructorEmbeddings(BaseModel, Embeddings):
         embeddings = self._embed(instruction_pairs)
         return embeddings
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Embed a query using a MosaicML deployed instructor embedding model.
 
         Args:

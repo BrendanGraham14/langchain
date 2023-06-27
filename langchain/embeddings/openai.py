@@ -171,14 +171,14 @@ class OpenAIEmbeddings(BaseModel, Embeddings):
     """Timeout in seconds for the OpenAPI request."""
     headers: Any = None
     tiktoken_model_name: Optional[str] = None
-    """The model name to pass to tiktoken when using this class. 
-    Tiktoken is used to count the number of tokens in documents to constrain 
-    them to be under a certain limit. By default, when set to None, this will 
-    be the same as the embedding model name. However, there are some cases 
-    where you may want to use this Embedding class with a model name not 
-    supported by tiktoken. This can include when using Azure embeddings or 
-    when using one of the many model providers that expose an OpenAI-like 
-    API but with different models. In those cases, in order to avoid erroring 
+    """The model name to pass to tiktoken when using this class.
+    Tiktoken is used to count the number of tokens in documents to constrain
+    them to be under a certain limit. By default, when set to None, this will
+    be the same as the embedding model name. However, there are some cases
+    where you may want to use this Embedding class with a model name not
+    supported by tiktoken. This can include when using Azure embeddings or
+    when using one of the many model providers that expose an OpenAI-like
+    API but with different models. In those cases, in order to avoid erroring
     when tiktoken is called, you can specify a model name to use here."""
 
     class Config:
@@ -434,7 +434,7 @@ class OpenAIEmbeddings(BaseModel, Embeddings):
                 )
             )["data"][0]["embedding"]
 
-    def embed_documents(
+    def _embed_documents(
         self, texts: List[str], chunk_size: Optional[int] = 0
     ) -> List[List[float]]:
         """Call out to OpenAI's embedding endpoint for embedding search docs.
@@ -451,7 +451,7 @@ class OpenAIEmbeddings(BaseModel, Embeddings):
         #       than the maximum context and use length-safe embedding function.
         return self._get_len_safe_embeddings(texts, engine=self.deployment)
 
-    async def aembed_documents(
+    async def _aembed_documents(
         self, texts: List[str], chunk_size: Optional[int] = 0
     ) -> List[List[float]]:
         """Call out to OpenAI's embedding endpoint async for embedding search docs.
@@ -468,7 +468,7 @@ class OpenAIEmbeddings(BaseModel, Embeddings):
         #       than the maximum context and use length-safe embedding function.
         return await self._aget_len_safe_embeddings(texts, engine=self.deployment)
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Call out to OpenAI's embedding endpoint for embedding query text.
 
         Args:
@@ -480,7 +480,7 @@ class OpenAIEmbeddings(BaseModel, Embeddings):
         embedding = self._embedding_func(text, engine=self.deployment)
         return embedding
 
-    async def aembed_query(self, text: str) -> List[float]:
+    async def _aembed_query(self, text: str) -> List[float]:
         """Call out to OpenAI's embedding endpoint async for embedding query text.
 
         Args:

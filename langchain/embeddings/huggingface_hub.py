@@ -77,7 +77,7 @@ class HuggingFaceHubEmbeddings(BaseModel, Embeddings):
             )
         return values
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Call out to HuggingFaceHub's embedding endpoint for embedding search docs.
 
         Args:
@@ -92,7 +92,7 @@ class HuggingFaceHubEmbeddings(BaseModel, Embeddings):
         responses = self.client(inputs=texts, params=_model_kwargs)
         return responses
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Call out to HuggingFaceHub's embedding endpoint for embedding query text.
 
         Args:
@@ -101,5 +101,5 @@ class HuggingFaceHubEmbeddings(BaseModel, Embeddings):
         Returns:
             Embeddings for the text.
         """
-        response = self.embed_documents([text])[0]
+        response = self._embed_documents([text])[0]
         return response

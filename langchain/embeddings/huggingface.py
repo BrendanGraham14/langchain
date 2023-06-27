@@ -37,7 +37,7 @@ class HuggingFaceEmbeddings(BaseModel, Embeddings):
     model_name: str = DEFAULT_MODEL_NAME
     """Model name to use."""
     cache_folder: Optional[str] = None
-    """Path to store models. 
+    """Path to store models.
     Can be also set by SENTENCE_TRANSFORMERS_HOME environment variable."""
     model_kwargs: Dict[str, Any] = Field(default_factory=dict)
     """Key word arguments to pass to the model."""
@@ -65,7 +65,7 @@ class HuggingFaceEmbeddings(BaseModel, Embeddings):
 
         extra = Extra.forbid
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Compute doc embeddings using a HuggingFace transformer model.
 
         Args:
@@ -78,7 +78,7 @@ class HuggingFaceEmbeddings(BaseModel, Embeddings):
         embeddings = self.client.encode(texts, **self.encode_kwargs)
         return embeddings.tolist()
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Compute query embeddings using a HuggingFace transformer model.
 
         Args:
@@ -117,7 +117,7 @@ class HuggingFaceInstructEmbeddings(BaseModel, Embeddings):
     model_name: str = DEFAULT_INSTRUCT_MODEL
     """Model name to use."""
     cache_folder: Optional[str] = None
-    """Path to store models. 
+    """Path to store models.
     Can be also set by SENTENCE_TRANSFORMERS_HOME environment variable."""
     model_kwargs: Dict[str, Any] = Field(default_factory=dict)
     """Key word arguments to pass to the model."""
@@ -145,7 +145,7 @@ class HuggingFaceInstructEmbeddings(BaseModel, Embeddings):
 
         extra = Extra.forbid
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Compute doc embeddings using a HuggingFace instruct model.
 
         Args:
@@ -158,7 +158,7 @@ class HuggingFaceInstructEmbeddings(BaseModel, Embeddings):
         embeddings = self.client.encode(instruction_pairs, **self.encode_kwargs)
         return embeddings.tolist()
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Compute query embeddings using a HuggingFace instruct model.
 
         Args:

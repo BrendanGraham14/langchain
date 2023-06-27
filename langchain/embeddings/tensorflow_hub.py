@@ -50,7 +50,7 @@ class TensorflowHubEmbeddings(BaseModel, Embeddings):
 
         extra = Extra.forbid
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Compute doc embeddings using a TensorflowHub embedding model.
 
         Args:
@@ -63,7 +63,7 @@ class TensorflowHubEmbeddings(BaseModel, Embeddings):
         embeddings = self.embed(texts).numpy()
         return embeddings.tolist()
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Compute query embeddings using a TensorflowHub embedding model.
 
         Args:

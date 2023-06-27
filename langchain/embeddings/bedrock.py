@@ -26,7 +26,7 @@ class BedrockEmbeddings(BaseModel, Embeddings):
         .. code-block:: python
 
             from langchain.bedrock_embeddings import BedrockEmbeddings
-            
+
             region_name ="us-east-1"
             credentials_profile_name = "default"
             model_id = "amazon.titan-e1t-medium"
@@ -128,7 +128,7 @@ class BedrockEmbeddings(BaseModel, Embeddings):
 
         return embeddings
 
-    def embed_documents(
+    def _embed_documents(
         self, texts: List[str], chunk_size: int = 1
     ) -> List[List[float]]:
         """Compute doc embeddings using a Bedrock model.
@@ -149,7 +149,7 @@ class BedrockEmbeddings(BaseModel, Embeddings):
             results.append(response)
         return results
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Compute query embeddings using a Bedrock model.
 
         Args:

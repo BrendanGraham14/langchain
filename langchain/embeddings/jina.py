@@ -71,7 +71,7 @@ class JinaEmbeddings(BaseModel, Embeddings):
         payload = dict(inputs=docs, metadata=self.request_headers, **kwargs)
         return self.client.post(on="/encode", **payload)
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+    def _embed_documents(self, texts: List[str]) -> List[List[float]]:
         """Call out to Jina's embedding endpoint.
         Args:
             texts: The list of texts to embed.
@@ -85,7 +85,7 @@ class JinaEmbeddings(BaseModel, Embeddings):
         ).embeddings
         return [list(map(float, e)) for e in embeddings]
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Call out to Jina's embedding endpoint.
         Args:
             text: The text to embed.

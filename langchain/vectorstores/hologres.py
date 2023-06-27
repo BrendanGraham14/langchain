@@ -44,11 +44,11 @@ document text);"""
         )
         self.cursor.execute(
             f"call set_table_property('{self.table_name}'"
-            + """, 'proxima_vectors', 
+            + """, 'proxima_vectors',
 '{"embedding":{"algorithm":"Graph",
 "distance_method":"SquaredEuclidean",
 "build_params":{"min_flush_proxima_row_count" : 1,
-"min_compaction_proxima_row_count" : 1, 
+"min_compaction_proxima_row_count" : 1,
 "max_total_size_to_merge_mb" : 2000}}}');"""
         )
         self.conn.commit()

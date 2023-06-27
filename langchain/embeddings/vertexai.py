@@ -22,7 +22,7 @@ class VertexAIEmbeddings(_VertexAICommon, Embeddings):
         values["client"] = TextEmbeddingModel.from_pretrained(values["model_name"])
         return values
 
-    def embed_documents(
+    def _embed_documents(
         self, texts: List[str], batch_size: int = 5
     ) -> List[List[float]]:
         """Embed a list of strings. Vertex AI currently
@@ -42,7 +42,7 @@ class VertexAIEmbeddings(_VertexAICommon, Embeddings):
             embeddings.extend([el.values for el in embeddings_batch])
         return embeddings
 
-    def embed_query(self, text: str) -> List[float]:
+    def _embed_query(self, text: str) -> List[float]:
         """Embed a text.
 
         Args:
