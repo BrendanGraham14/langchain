@@ -36,6 +36,7 @@ from langchain.chat_models.minimax import MiniMaxChat
 from langchain.chat_models.mlflow_ai_gateway import ChatMLflowAIGateway
 from langchain.chat_models.ollama import ChatOllama
 from langchain.chat_models.openai import ChatOpenAI
+from langchain.chat_models.poe import ChatPoe
 from langchain.chat_models.promptlayer_openai import PromptLayerChatOpenAI
 from langchain.chat_models.vertexai import ChatVertexAI
 
@@ -61,4 +62,5 @@ __all__ = [
     "ChatKonko",
     "QianfanChatEndpoint",
     "ChatFireworks",
+    "ChatPoe",
 ]
